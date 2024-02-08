@@ -1,23 +1,13 @@
 import express from 'express';
 import multer from 'multer';
 
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
-import { validationResult } from 'express-validator';
 
 import { registerValidation, loginValidation, postCreateValidation } from './validations.js';
 
-import UserModel from './models/user.js';
-
-import checkAuth from './utils/checkAuth.js';
-
-import user from './models/user.js';
-
 import { userController, postController } from "./controllers/index.js";
-import handleValidationErrors from './utils/handleValidationErrors.js';
 
-
+import { handleValidationErrors, checkAuth } from "./utils/index.js";
 
 mongoose
     .connect('mongodb+srv://admin:skibidipapa@cluster0.e7ahum7.mongodb.net/blog?retryWrites=true&w=majority')
@@ -65,4 +55,3 @@ app.listen(4444, (err) => {
 
     console.log('Server OK');
 }); // задаем порт, если будет ошибка возвращаем ошибку, если все отлично, в терминале сервер ок
-
