@@ -46,6 +46,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "ms": "^2.0.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.3",
     "once": "^1.4.0",
     "path-is-absolute": "^1.0.1",
@@ -81,6 +82,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
   "description": ""
 }
