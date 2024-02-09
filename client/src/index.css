@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,500;0,600;1,100&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+  background-color: #ffffff;
+}
+
+/* header */
+
+.header {
+  position: absolute;
+  padding: 30px 60px;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  backdrop-filter: blur(5px);
+}
+
+.navigation{
+  padding: 0 100px;
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+
+.header ul button{
+  padding: 5px 15px;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: transparent;
+  transition: 0.3s ease-in-out;
+}
+
+.header ul button:hover{
+  background:rgba(128, 0, 128, 0.479);
+  transition: 0.3s ease-in-out;
+  color: #ffffff;
+}
+
+.autorization{
+  background-color: white;
+}
+
+.gamburgerHolder {
+  display: Visible;
+  margin-left: 30px;
+}
+
+.gamburger {
+  padding-top: 9px;
+  font-size: 35px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+.gamburger:hover {
+  color:rgba(128, 0, 128, 0.479);
+  transition: 0.6s;
+}
+
+.authorization {
+  padding-top: 9px;
+  font-size: 35px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+.authorization:hover{
+  color:rgba(128, 0, 128, 0.479);
+  transition: 0.6s;
+}
+
+main {
+  margin: 70px 0 0 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentMenu{
+  width: 50%;
+  margin: 3px 0 0 3px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.contentMenu li button{
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 1px 3px;
+  background: transparent;
+  transition: 0.6s;
+}
+
+.contentMenu li button:hover{
+  color: rgba(128, 0, 128, 0.479);
+  transition: 0.6s;
+}
+
+.content {
+  margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+
+.item{
+  margin: 20px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid gray;
+}
+
+/* register */
+
+.authContainer {
+  background-color: rgba(247, 123, 226, 0.8);
+  border-radius: 28px;
+  background: linear-gradient(217deg, rgba(247, 123, 226, 0.8), rgba(255,0,0,0) 70.71%),
+          linear-gradient(127deg, rgba(119, 219, 223, 0.8), rgba(0,255,0,0) 70.71%),
+          linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+  box-shadow: 0 0px 70px white;
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 360px;
+}
+
+.authContainer h1{
+  font-size: 28px;
+  line-height: 45px;
+  letter-spacing: 0.2px;
+  margin: 10px 0;
+}
+
+.authContainer a{
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px;
+  transition: 0.6s;
+}
+
+.authContainer a:hover{
+  color: #afaeae;
+  font-size: 15px;
+  transition: 0.6s;
+}
+
+
+.authContainer button{
+  background-color: blueviolet;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  border: 0.5px solid transparent;
+  border-radius: 30px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+.authContainer button:hover{
+  font-size: 16px;
+  color: #afaeae;
+  transition: 0.6s;
+}
+
+.toggleChoice button{
+  background-color: transparent;
+}
+
+.formSignIn .register {
+  background-color: transparent;
+}
+
+.formSignUp .login {
+  background-color: transparent;
+}
+
+.choiceHolder{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction:row;
+}
+
+.choiceHolder #adaptiveRegister{
+  display: none;
+}
+
+.choiceHolder #adaptiveLogin{
+  display: none;
+}
+
+.authContainer form{
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.authContainer input{
+  background-color: #e7e3e3;
+  border: none;
+  margin: 7px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 7px;
+  width: 100%;
+  outline: none;
+}
+
+.formContainer{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 1s ease-in-out;
+  z-index: 1;
+}
+
+.signIn{
+  left: 0;
+  width: 45%;
+}
+
+.signUp{
+  right: 0;
+  width: 55%;
+  transform: translateX(500%);
+  visibility: hidden;
+}
+
+.toggleChoice{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(217deg, rgb(255, 103, 247), rgb(150, 203, 253) 70.71%),
+          linear-gradient(127deg, rgb(0, 247, 255), rgb(255, 58, 245) 70.71%),
+          linear-gradient(336deg, rgb(146, 146, 207), rgb(255, 77, 255) 70.71%);
+  transition: all 1s ease-in-out;
+  z-index: 2;
+}
+
+.toggleChoiceOnSignIn{
+  left: 0;
+  width: 45%;
+  border-radius: 0 100px 100px 0;
+  transform: translateX(-500%);
+}
+
+.toggleChoiceOnSignUp{
+  position: absolute;
+  right: 0;
+  width: 55%;
+  border-radius: 100px 0 0 100px;
+}
+
+.toggleChoiceOnSignIn h1{
+  font-size: 22px;
+}
+
+.toggleRight{
+  transform: translateX(500%);
+  visibility: hidden;
+}
+
+.toggleLeft{
+  transform: translateX(-500%);
+  visibility: hidden;
+}
+
+.toggleIntoContainer{
+  transform: translateX(0%);
+  visibility: visible;
+}
