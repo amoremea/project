@@ -8,6 +8,7 @@ import { RegisterPage } from './pages/RegisterPage.jsx'
 import { SearchPage } from './pages/SearchPage.jsx'
 import { FriendsPage } from './pages/FriendsPage.jsx'
 import { ChatPage } from "./pages/ChatPage.jsx"
+import { LoginPage } from "./pages/LoginPage.jsx"
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path=':id' element={<PostPage />} />
         <Route path=':id/edit' element={<EditPostPage />} />
         <Route path='new' element={<CreatePostPage />} />
-        <Route path='auth' element={<RegisterPage />} />
+        <Route path='auth/login' element={<LoginPage />} />
+        <Route path='auth/register' element={<RegisterPage />} />
         <Route path='search' element={<SearchPage />} />
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />

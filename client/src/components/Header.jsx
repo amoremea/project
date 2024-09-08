@@ -2,6 +2,7 @@ import React from 'react';
 import { GoPerson } from "react-icons/go"
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
+import '../styles/Header.css'
 
 export const Header = () => {
   return (
@@ -55,7 +56,7 @@ export const Header = () => {
           
           <div className='authorizationHolder' id='authorizationHolder'>
               <NavLink
-                to={"/auth"}
+                to={"/auth/login"}
                 href="/"
               >
                 <button className='authorization' id='authorization'>

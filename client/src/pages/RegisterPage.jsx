@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { registerUser } from '../redux/features/auth/authSlice'
+import '../styles/Auth.css'
+
 
 export const RegisterPage = () => {
   const [ username, setUsername ] = useState('')
@@ -21,57 +23,53 @@ export const RegisterPage = () => {
   const [] = useState(false)
   return (
     <main className="main" id="main">
-      <div class="authContainer" id = "authContainer">
+      <div className="authContainer" id = "authContainer">
 
-        <div class="toggleChoiceOnSignUp toggleChoice" id="toggleChoiceOnSignUp">
-            <h1>Нет аккаунта?</h1>
-            <button id="register">Зарегистрироваться</button>
-        </div>
+        <div className="toggleChoiceOnSignIn toggleChoice toggleIntoContainer" id="toggleChoiceOnSignIn">
 
-        <div class="toggleChoiceOnSignIn toggleChoice" id="toggleChoiceOnSignIn">
             <h1>Уже зарегистрированы?</h1>
-            <button id = "login">Войти</button>
-        </div>
 
-        <div class="signIn formContainer" id="signIn">
-            <form class = "formSignIn" id = "formSignIn">
-                <h1>Вход</h1>
-                <input
-                class="email"
-                type="text"
-                placeholder="Введите почту"
-                />
-                <input class="password" type="password" placeholder="Введите пароль" />
-                <div class="choiceHolder">
-                    <button> Войти </button>
-                    <button class = "register" id="adaptiveRegister">Зарегистрироваться</button>
-                </div>  
-                <a href="#">Забыли пароль?</a>
-            </form>
+            <NavLink
+            to={"/auth/login"}
+            href="/"
+            >
+            <button className = "login" id = "adaptiveLogin">Войти</button>
+            </NavLink>
+            
         </div>
             
-        <div class="signUp formContainer" id="signUp">
-            <form class = "formSignUp" id = "formSignUp">
+        <div className="signUp formContainer toggleIntoContainer" id="signUp">
+            <form className = "formSignUp" id = "formSignUp">
+
                 <h1>Создайте аккаунт</h1>
+
                 <input
-                class="nickName"
+                className="nickName"
                 type="text"
-                value = "username"
+                value = {username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Введите ник"
                 />
-                {/* <input class="email" type="text" placeholder="Введите почту" /> */}
+
                 <input
-                class="password"
+                className="password"
                 type="password"
-                value = "password"
+                value = {password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Введите пароль"
                 />
-                <div class="choiceHolder">
+
+                <div className="choiceHolder">
                     <button onClick={handleSubmit}> Зарегистрироваться </button>
-                    <button class = "login" id = "adaptiveLogin">Войти</button>
+
+                    <NavLink
+                    to={"/auth/login"}
+                    href="/"
+                    >
+                    <button className = "login" id = "adaptiveLogin">Войти</button>
+                    </NavLink>
                 </div>
+
             </form>
         </div>
       </div>
