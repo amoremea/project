@@ -1,0 +1,175 @@
+/* register */
+
+.authContainer {
+    background-color: rgba(247, 123, 226, 0.8);
+    border-radius: 28px;
+    background: linear-gradient(217deg, rgba(247, 123, 226, 0.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(119, 219, 223, 0.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+    box-shadow: 0 0px 70px white;
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 360px;
+  }
+  
+  .authContainer h1{
+    font-size: 28px;
+    line-height: 45px;
+    letter-spacing: 0.2px;
+    margin: 10px 0;
+  }
+  
+  .authContainer a{
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px;
+    transition: 0.6s;
+  }
+  
+  .authContainer a:hover{
+    color: #afaeae;
+    font-size: 15px;
+    transition: 0.6s;
+  }
+  
+  
+  .authContainer button{
+    background-color: blueviolet;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    border: 0.5px solid transparent;
+    border-radius: 30px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.6s;
+  }
+  
+  .authContainer button:hover{
+    font-size: 16px;
+    color: #afaeae;
+    transition: 0.6s;
+  }
+  
+  .toggleChoice button{
+    background-color: transparent;
+  }
+  
+  .formSignIn .register {
+    background-color: transparent;
+  }
+  
+  .formSignUp .login {
+    background-color: transparent;
+  }
+  
+  .choiceHolder{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:row;
+  }
+  
+  .choiceHolder #adaptiveRegister{
+    display: none;
+  }
+  
+  .choiceHolder #adaptiveLogin{
+    display: none;
+  }
+  
+  .authContainer form{
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+  }
+  
+  .authContainer input{
+    background-color: #e7e3e3;
+    border: none;
+    margin: 7px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 7px;
+    width: 100%;
+    outline: none;
+  }
+  
+  .formContainer{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 1s ease-in-out;
+    z-index: 1;
+  }
+  
+  .signIn{
+    left: 0;
+    width: 45%;
+  }
+  
+  .signUp{
+    right: 0;
+    width: 55%;
+    transform: translateX(500%);
+    visibility: hidden;
+  }
+  
+  .toggleChoice{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    background: linear-gradient(217deg, rgb(255, 103, 247), rgb(150, 203, 253) 70.71%),
+            linear-gradient(127deg, rgb(0, 247, 255), rgb(255, 58, 245) 70.71%),
+            linear-gradient(336deg, rgb(146, 146, 207), rgb(255, 77, 255) 70.71%);
+    transition: all 1s ease-in-out;
+    z-index: 2;
+  }
+  
+  .toggleChoiceOnSignIn{
+    left: 0;
+    width: 45%;
+    border-radius: 0 100px 100px 0;
+    transform: translateX(-500%);
+  }
+  
+  .toggleChoiceOnSignUp{
+    position: absolute;
+    right: 0;
+    width: 55%;
+    border-radius: 100px 0 0 100px;
+  }
+  
+  .toggleChoiceOnSignIn h1{
+    font-size: 22px;
+  }
+  
+  .toggleRight{
+    transform: translateX(500%);
+    visibility: hidden;
+  }
+  
+  .toggleLeft{
+    transform: translateX(-500%);
+    visibility: hidden;
+  }
+  
+  .toggleIntoContainer{
+    transform: translateX(0%);
+    visibility: visible;
+  }
