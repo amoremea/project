@@ -9,6 +9,8 @@ import { SearchPage } from './pages/SearchPage.jsx'
 import { FriendsPage } from './pages/FriendsPage.jsx'
 import { ChatPage } from "./pages/ChatPage.jsx"
 import { LoginPage } from "./pages/LoginPage.jsx"
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />
       </Routes>
+
+      <ToastContainer position='bottom-right'/>
     </Layout>
   )
 }

@@ -1,51 +1,49 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../../../utils/axios'
+import axios from '../../../utils/axios';
 
 const initialState = {
     user: null,
     token: null,
     isLoading: false,
     status: null,
-}
+};
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
-    async ({username, password}) => {
+    async ({ username, password }, { rejectWithValue }) => {
         try {
-            const {data} = await axios.post('/auth/register', {
-                username,
-                password,
-            })
-            if(data.token){
-                window.localStorage.setItem('token', data.token)
+            const { data } = await axios.post('/auth/register', { username, password });
+            if (data.token) {
+                window.localStorage.setItem('token', data.token);
             }
-            return data
+            return data;
         } catch (error) {
-            console.log(error);
+            return rejectWithValue(error.response?.data || { message: 'Unknown error occurred' });
         }
-    },)
+    }
+);
 
 export const authSlice = createSlice({
     name: 'auth',
-    initialState: {},
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(registerUser.pending, (state) => {
-          state.isLoading = true;
-          state.status = null;
-        })
-        .addCase(registerUser.fulfilled, (state, action) => {
-          state.isLoading = false;
-          state.status = action.payload.message;
-          state.user = action.payload.user;
-          state.token = action.payload.token;
-        })
-        .addCase(registerUser.rejected, (state, action) => {
-          state.status = action.payload.message;
-          state.isLoading = false;
-        })
+            .addCase(registerUser.pending, (state) => {
+                state.isLoading = true;
+                state.status = null;
+            })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.status = action.payload.message || 'Registration successful';
+                state.user = action.payload.user;
+                state.token = action.payload.token;
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.status = action.payload?.message || action.error.message || 'An error occurred';
+            });
     }
-})
+});
 
-export default authSlice.reducer
+export default authSlice.reducer;

@@ -115,8 +115,9 @@
   .signIn{
     left: 0;
     width: 45%;
+    transform: translateX(-500%);
   }
-  
+
   .signUp{
     right: 0;
     width: 55%;
@@ -153,23 +154,14 @@
     right: 0;
     width: 55%;
     border-radius: 100px 0 0 100px;
+    transform: translateX(500%);
   }
   
   .toggleChoiceOnSignIn h1{
     font-size: 22px;
   }
   
-  .toggleRight{
-    transform: translateX(500%);
-    visibility: hidden;
-  }
-  
-  .toggleLeft{
-    transform: translateX(-500%);
-    visibility: hidden;
-  }
-  
-  .toggleIntoContainer{
+  .active{
     transform: translateX(0%);
     visibility: visible;
   }

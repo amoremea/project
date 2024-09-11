@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { registerUser } from '../redux/features/auth/authSlice'
+import { toast } from 'react-toastify'
 import '../styles/Auth.css'
 
 
 export const RegisterPage = () => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('') 
+  const {status} = useSelector((state) => state.auth)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (status) {
+      toast(status)
+    }
+  }, [status])
 
   const handleSubmit = () => {
     try {
@@ -20,26 +28,24 @@ export const RegisterPage = () => {
     }
   }
 
-  const [] = useState(false)
   return (
     <main className="main" id="main">
       <div className="authContainer" id = "authContainer">
 
-        <div className="toggleChoiceOnSignIn toggleChoice toggleIntoContainer" id="toggleChoiceOnSignIn">
+        <div className="toggleChoiceOnSignIn toggleChoice active" id="toggleChoiceOnSignIn">
 
             <h1>Уже зарегистрированы?</h1>
 
             <NavLink
             to={"/auth/login"}
-            href="/"
             >
             <button className = "login" id = "adaptiveLogin">Войти</button>
             </NavLink>
             
         </div>
             
-        <div className="signUp formContainer toggleIntoContainer" id="signUp">
-            <form className = "formSignUp" id = "formSignUp">
+        <div className="signUp formContainer active" id="signUp">
+            <form className = "formSignUp" id = "formSignUp" onSubmit={(e) => e.preventDefault()}>
 
                 <h1>Создайте аккаунт</h1>
 
@@ -60,13 +66,17 @@ export const RegisterPage = () => {
                 />
 
                 <div className="choiceHolder">
-                    <button onClick={handleSubmit}> Зарегистрироваться </button>
+                    <button
+                    type='submit'
+                    onClick={handleSubmit}
+                    >
+                      Зарегистрироваться
+                    </button>
 
                     <NavLink
                     to={"/auth/login"}
-                    href="/"
                     >
-                    <button className = "login" id = "adaptiveLogin">Войти</button>
+                    <button className = "login" id = "adaptiveLogin">Уже зарегистрированы?</button>
                     </NavLink>
                 </div>
 
