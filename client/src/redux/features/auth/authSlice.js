@@ -23,11 +23,27 @@ export const registerUser = createAsyncThunk(
     }
 );
 
+export const loginUser = createAsyncThunk(
+    'auth/loginUser',
+    async ({ username, password }, { rejectWithValue }) => {
+        try {
+            const { data } = await axios.post('/auth/login', { username, password });
+            if (data.token) {
+                window.localStorage.setItem('token', data.token);
+            }
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || { message: 'Unknown error occurred' });
+        }
+    }
+);
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        //AUTH user
         builder
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true;
@@ -40,6 +56,20 @@ export const authSlice = createSlice({
                 state.token = action.payload.token;
             })
             .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.status = action.payload?.message || action.error.message || 'An error occurred';
+            })
+            .addCase(loginUser.pending, (state) => {
+                state.isLoading = true;
+                state.status = null;
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.status = action.payload.message || 'Registration successful';
+                state.user = action.payload.user;
+                state.token = action.payload.token;
+            })
+            .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.status = action.payload?.message || action.error.message || 'An error occurred';
             });
