@@ -9,9 +9,20 @@ import { FriendsPage } from './pages/FriendsPage.jsx'
 import { ChatPage } from "./pages/ChatPage.jsx"
 import { AuthPage } from "./pages/AuthPage.jsx"
 import { ToastContainer } from 'react-toastify'
+import { MePage } from './pages/Me.jsx'
 import 'react-toastify/dist/ReactToastify.css'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getMe } from './redux/features/auth/authSlice.js'
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getMe())
+  }, [])
+
   return (
     <Layout>
       <Routes> 
@@ -23,6 +34,7 @@ function App() {
         <Route path='search' element={<SearchPage />} />
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />
+        <Route path='me' element={<MePage />}/>
       </Routes>
 
       <ToastContainer position='bottom-right'/>

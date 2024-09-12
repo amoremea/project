@@ -38,12 +38,31 @@ export const loginUser = createAsyncThunk(
     }
 );
 
+export const getMe = createAsyncThunk(
+    'auth/getMe', // Updated action type
+    async () => {
+        try {
+            const { data } = await axios.get('/auth/me');
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+);
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.user = null;
+            state.token = null;
+            state.isLoading = false;
+            state.status = null;
+        }
+    },
     extraReducers: (builder) => {
-        //AUTH user
+        // Register
         builder
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true;
@@ -59,21 +78,39 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.status = action.payload?.message || action.error.message || 'An error occurred';
             })
+            // Login
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
                 state.status = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.status = action.payload.message || 'Registration successful';
+                state.status = action.payload.message;
                 state.user = action.payload.user;
                 state.token = action.payload.token;
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.status = action.payload?.message || action.error.message || 'An error occurred';
+            })
+            // Check Authorization
+            .addCase(getMe.pending, (state) => {
+                state.isLoading = true;
+                state.status = null;
+            })
+            .addCase(getMe.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.status = null;
+                state.user = action.payload?.user;
+                state.token = action.payload?.token;
+            })
+            .addCase(getMe.rejected, (state, action) => {
+                state.isLoading = false;
+                state.status = action.payload?.message || action.error.message || 'An error occurred';
             });
     }
 });
+
+export const checkIsAuth = (state) => Boolean(state.auth.token);
 
 export default authSlice.reducer;

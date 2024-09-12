@@ -1,0 +1,72 @@
+/* register */
+
+.postContainer {
+    font-family: 'IBM Plex Sans';
+    padding: 20px 35px ;
+    position: relative;
+    overflow: hidden;
+    width: 1024px;
+    min-width: 1024px;
+    border: 3px solid rgba(252, 249, 255, 0.508);
+    border-top: none;
+    box-shadow: 7px 5px 5px rgba(226, 153, 255, 0.493);
+    border-radius: 10px;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .postContainer h1{
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: 0.2px;
+    margin: 10px 0;
+  }
+
+  .postContainer h2{
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    margin: 10px 0;
+  }
+
+  .postContainer img {
+    width: auto;
+  }
+
+  .postContent{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(252, 156, 156, 0.349);
+    border-left: 1px solid rgba(170, 207, 255, 0.678);
+    border-radius: 15px;
+  }
+
+  .iconsPosts {
+    width: 100%;
+    padding: 0px 20px 0px 20px;
+    font-size: 28px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .postIcon:hover {
+    color: rgba(226, 153, 255, 0.85);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .iconRight {
+    margin-left: 700px; /* Оставляет пространство между этой иконкой и остальными */
+  }
+
+  .viewersCounter{
+    font-size: 20px;
+    color:rgb(0, 11, 26);
+  }

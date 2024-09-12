@@ -3,8 +3,12 @@ import { GoPerson } from "react-icons/go"
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import '../styles/Header.css'
+import { useSelector } from 'react-redux';
+import {checkIsAuth, logout} from '../redux/features/auth/authSlice'
 
 export const Header = () => {
+  const isAuth = useSelector(checkIsAuth)
+
   return (
     <header>
       <div className='header'>
