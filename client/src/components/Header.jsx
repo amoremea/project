@@ -56,14 +56,6 @@ export const Header = () => {
                   <button>Chat</button>
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to={'/search'}
-                  href='/'
-                >
-                  <button>Search</button>
-                </NavLink>
-              </li>
           </ul>
           
           <div className='authorizationHolder' id='authorizationHolder'>

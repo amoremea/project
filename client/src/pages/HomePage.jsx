@@ -19,23 +19,16 @@ export const HomePage = ({ children }) => {
         </li>
         <li>
           <NavLink
-           to={'/home/recomendations'}
+           to={'/create'}
           >
-          <button id='contentRecomendations'>Recomendations</button>
+          <button id='create'>Create</button>
           </NavLink>
         </li>
         <li>
           <NavLink
-           to={'/home/contentLikes'}
+           to={'/likes'}
           >
-          <button id='contentLikes'>Likes</button>
-          </NavLink>
-          </li>
-        <li>
-          <NavLink
-           to={'/home/contentdDislikes'}
-          >
-          <button id='contentDislikes'>Dislikes</button>
+          <button id='likes'>Likes</button>
           </NavLink>
           </li>
       </ul>
