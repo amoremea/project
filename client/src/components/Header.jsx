@@ -3,11 +3,19 @@ import { GoPerson } from "react-icons/go"
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import '../styles/Header.css'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {checkIsAuth, logout} from '../redux/features/auth/authSlice'
+import { toast } from 'react-toastify';
 
 export const Header = () => {
   const isAuth = useSelector(checkIsAuth)
+  const dispatch = useDispatch()
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    window.localStorage.removeItem('token')
+    toast('Вы вышли из системы')
+  }
 
   return (
     <header>
@@ -59,7 +67,17 @@ export const Header = () => {
           </ul>
           
           <div className='authorizationHolder' id='authorizationHolder'>
-              <NavLink
+              { isAuth ? ( 
+                <NavLink
+                to={"/me"}
+                href="/"
+              >
+                <button className='authorization' id='authorization'>
+                    <GoPerson />
+                </button>
+              </NavLink>
+              ) : (
+                <NavLink
                 to={"/auth/login"}
                 href="/"
               >
@@ -67,6 +85,7 @@ export const Header = () => {
                     <GoPerson />
                 </button>
               </NavLink>
+              )}
           </div>
       </div>
     </header>

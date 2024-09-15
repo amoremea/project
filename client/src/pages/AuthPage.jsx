@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, loginUser } from '../redux/features/auth/authSlice';
+import { registerUser, loginUser, checkIsAuth } from '../redux/features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
@@ -11,17 +11,18 @@ export const AuthPage = () => {
   const [password, setPassword] = useState('');
 
   const { status } = useSelector((state) => state.auth);
+  const isAuth = useSelector(checkIsAuth)
   const dispatch = useDispatch();
   const navigate = useNavigate(); // For navigation after successful login/register
 
   useEffect(() => {
     if (status) {
       toast(status);
-      if (status === 'Registration successful' || status === 'Login successful') {
-        navigate('/home'); // Redirect to home or other page upon successful auth
+      if (isAuth) {
+        navigate('/'); // Redirect to home or other page upon successful auth
       }
     }
-  }, [status, navigate]);
+  }, [status, isAuth, navigate]);
 
   const handleSubmitRegister = (e) => {
     e.preventDefault();
