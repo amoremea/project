@@ -27,7 +27,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path=':id' element={<PostPage />} />
         <Route path=':id/edit' element={<EditPostPage />} />
-        <Route path='new' element={<CreatePostPage />} />
+        <Route path='create' element={<CreatePostPage />} />
         <Route path='auth/login' element={<AuthPage />} />
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />
