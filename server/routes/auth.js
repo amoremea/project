@@ -12,6 +12,6 @@ router.post('/register', register)
 router.post('/login', login)
 
 // Get Me
-router.get('/getMe', checkAuth, getMe)
+router.get('/me', checkAuth, getMe)
 
 export default router

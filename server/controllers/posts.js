@@ -43,7 +43,8 @@ export const createPost = async (req,res) => {
         await User.findByIdAndUpdate(req.userId, {
             $push: {posts: newPostWithoutImage},
         })
-        res.json(newPostWithoutImage)
+        
+        return res.json(newPostWithoutImage)
     }
     catch {
         res.json({message: 'Что-то пошло не так'});

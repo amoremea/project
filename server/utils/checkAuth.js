@@ -1,23 +1,28 @@
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken';
 
 export const checkAuth = (req, res, next) => {
-    const token = (req.headers.authorization || "").repalce(/Bearer\s?/, '')
+    const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
 
-    if(token){
+    if (token) {
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-            req.userId = decoded.id
+            // Проверка токена и декодирование
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             
-            next()
+            // Добавляем идентификатор пользователя в запрос
+            req.userId = decoded.id;
+            
+            // Переход к следующему middleware
+            next();
         } catch (error) {
-            return res.json({
+            // Ошибка при проверке токена
+            return res.status(401).json({
                 message: 'Нет доступа.',
-            })
+            });
         }
     } else {
-        return res.json({
+        // Если токен отсутствует
+        return res.status(401).json({
             message: 'Нет доступа',
-        })
+        });
     }
-}
+};

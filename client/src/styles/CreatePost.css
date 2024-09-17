@@ -19,29 +19,39 @@
     margin-bottom: 10px;
   }
 
+  .createPostContainer form{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:column;
+  }
+
   .createPostContainer input{
     border: 1px solid #dbdbdb;
     border-radius: 50px;
     margin: 5px;
     padding: 5px;
-    cursor: pointer;
   }
 
   .createPostContainer button{
+    padding: 10px;
     border: 1px solid transparent;
     background-color: #fafafa;
     border-radius: 30px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
 
   .createPostContainer button:hover{
+    padding: 20px;
     border: 1px solid transparent;
-    background-color:  red;
+    background-color:  rgb(252, 153, 252);
     border-radius: 30px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
 
-  .imgCreatePost{
+  .uploadImgCreatePost{
     width: 400px;
   }
 
