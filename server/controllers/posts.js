@@ -1,52 +1,68 @@
-import Post from '../models/Post.js'
-import User from '../models/User.js'
-import path, {dirname} from 'path'
-import { fileURLToPath } from 'url'
+import Post from '../models/Post.js';
+import User from '../models/User.js';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-//Create post 
+// Create post
+export const createPost = async (req, res) => {
+    try {
+        const { title, text } = req.body;
+        const user = await User.findById(req.userId);
 
-export const createPost = async (req,res) => {
-    try{
-        const {title, text} = req.body
-        const user = await User.findById(req.userId)
-
-
-        if (req.files) {
-            let fileName = Date.now().toString() + req.files.image.name
-            const __dirname = dirname(fileURLToPath(import.meta.url))
-            req.files.image.mv(path.join(__dirname, '..', 'uploads', fileName))
-
-            const newPostWithImage = new Post({
-                username: user.username,
-                title,
-                text,
-                imgUrl: fileName,
-                author: req.userId,
-            })
-
-            await newPostWithImage.save()
-            await User.findByIdAndUpdate(req.userId, {
-                $push: {posts: newPostWithImage},
-            })
-
-            return res.json(newPostWithImage)
+        if (!user) {
+            return res.status(404).json({ message: 'Пользователь не найден' });
         }
 
-        const newPostWithoutImage = new Post({
+        // Если загружены файлы
+        let fileName = '';
+        if (req.files && req.files.image) {
+            fileName = Date.now().toString() + req.files.image.name;
+            const __dirname = dirname(fileURLToPath(import.meta.url));
+            const filePath = path.join(__dirname, '..', 'uploads', fileName);
+
+            // Перемещаем файл в папку uploads
+            req.files.image.mv(filePath, (err) => {
+                if (err) {
+                    console.error('Ошибка при загрузке файла:', err);
+                    return res.status(500).json({ message: 'Ошибка при загрузке файла' });
+                }
+            });
+        }
+
+        // Создаем пост с или без изображения
+        const newPost = new Post({
             username: user.username,
             title,
             text,
-            imgUrl: '',
+            imgUrl: fileName,
             author: req.userId,
-        })
-        await newPostWithoutImage.save()
+        });
+
+        await newPost.save();
         await User.findByIdAndUpdate(req.userId, {
-            $push: {posts: newPostWithoutImage},
-        })
-        
-        return res.json(newPostWithoutImage)
+            $push: { posts: newPost },
+        });
+
+        return res.json(newPost);
+    } catch (error) {
+        console.error('Ошибка при создании поста:', error);
+        res.status(500).json({ message: 'Ошибка при создании поста' });
     }
-    catch {
-        res.json({message: 'Что-то пошло не так'});
+};
+
+// Get all posts
+export const getAll = async (req, res) => {
+    try {
+        const posts = await Post.find().sort('-createdAt');
+        const popularPosts = await Post.find().limit(5).sort('-views');
+
+        if (!posts.length) {
+            return res.status(404).json({ message: 'Постов нет' });
+        }
+
+        return res.json({ posts, popularPosts });
+    } catch (error) {
+        console.error('Ошибка при получении постов:', error);
+        res.status(500).json({ message: 'Ошибка при получении постов' });
     }
-}
+};

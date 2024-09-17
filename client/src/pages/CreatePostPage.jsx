@@ -3,13 +3,16 @@ import { HomeNav } from './UI/Elements/HomeNav'
 import '../styles/CreatePost.css'
 import {useDispatch} from 'react-redux'
 import { createPost } from '../redux/features/post/postSlice'
+import { useNavigate } from 'react-router-dom'
 
 export const CreatePostPage = () => {
 
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [image, setImage] = useState('')
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const submitHandler = () => {
     try {
@@ -18,9 +21,14 @@ export const CreatePostPage = () => {
       data.append('text', text)
       data.append('image', image)
       dispatch(createPost(data))
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
+  }
+  const clearFormHandler = () =>{
+    setText('')
+    setTitle('')
   }
   
   return (
@@ -31,9 +39,13 @@ export const CreatePostPage = () => {
           <input className='titleCreatePost' type="text" placeholder='Заголовок' value={title} onChange={(e) => setTitle(e.target.value)}/>
           <input className='textCreatePost' type="text" placeholder='Текст' value={text} onChange={(e) => setText(e.target.value)}/>
           <input type='file' className='uploadImgCreatePost' onChange={(e) => setImage(e.target.files[0])}/>
-          <img src="" alt="" />
+          <div>
+            {image && (
+              <img src={URL.createObjectURL(image)} alt='image' />
+            )}
+          </div>
           <button onClick={submitHandler} className='uploadPost' >Создать пост</button>
-          <button className='cancelPost' >Отмена</button>
+          <button onClick={clearFormHandler} className='cancelPost' >Отмена</button>
         </form>
       </div>
     </main>

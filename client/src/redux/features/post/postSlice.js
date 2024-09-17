@@ -1,25 +1,39 @@
-import { createSlice, createAsyncThunk, isAction } from '@reduxjs/toolkit'
-import axios from '../../../utils/axios'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../../../utils/axios';
 
 const initialState = {
     posts: [],
     popularPosts: [],
     loading: false,
-}
+};
 
 export const createPost = createAsyncThunk(
-    'post/createPost', 
-    async(params) =>{
-        try{
-            const {data} = await axios.post('/posts', params)
-            return data
+    'post/createPost',
+    async (params) => {
+        try {
+            const { data } = await axios.post('/posts', params);
+            return data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            throw error;  // Проброс ошибки для обработки в .rejected
         }
-    },
-)
+    }
+);
 
-export const postSlice = createSlice({
+export const getAllPosts = createAsyncThunk(
+    'post/getAllPosts',
+    async () => {
+        try {
+            const { data } = await axios.get('/posts');
+            return data;  // Ожидаем, что сервер вернёт объект с полями posts и popularPosts
+        } catch (error) {
+            console.log(error);
+            throw error;  // Проброс ошибки для обработки в .rejected
+        }
+    }
+);
+
+const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {},
@@ -27,16 +41,28 @@ export const postSlice = createSlice({
         builder
             // Create Post
             .addCase(createPost.pending, (state) => {
-                state.loading = true
+                state.loading = true;
             })
             .addCase(createPost.fulfilled, (state, action) => {
-                state.loading = false
-                state.posts.push(action.payload)
+                state.loading = false;
+                state.posts.push(action.payload);
             })
             .addCase(createPost.rejected, (state) => {
-                state.loading = false
+                state.loading = false;
             })
+            // Get All Posts
+            .addCase(getAllPosts.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAllPosts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.posts = action.payload.posts || [];  // Защита от undefined
+                state.popularPosts = action.payload.popularPosts || [];  // Защита от undefined
+            })
+            .addCase(getAllPosts.rejected, (state) => {
+                state.loading = false;
+            });
     }
-})
+});
 
-export default postSlice.reducer
+export default postSlice.reducer;
