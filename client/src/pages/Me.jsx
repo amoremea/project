@@ -1,41 +1,58 @@
-import React from 'react'
-import img from '../images/i.jpg';
-import '../styles/Me.css'
+import React, { useState, useEffect } from 'react';
+import axios from '../utils/axios';
+import '../styles/Me.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {checkIsAuth, logout} from '../redux/features/auth/authSlice'
+import { checkIsAuth, logout } from '../redux/features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { PostItem } from './UI/Elements/PostItem';
 
 export const MePage = () => {
   const { status } = useSelector((state) => state.auth);
-  const isAuth = useSelector(checkIsAuth)
-  const dispatch = useDispatch()
+  const isAuth = useSelector(checkIsAuth);
+  const dispatch = useDispatch();
   const navigate = useNavigate(); // For navigation after successful login/register
 
   useEffect(() => {
     if (!isAuth) {
-      navigate('/auth/login')
+      navigate('/auth');
     }
-  })
+  }, [isAuth, navigate]); // Add `isAuth` and `navigate` to the dependency array
 
   const logoutHandler = () => {
-    dispatch(logout())
-    window.localStorage.removeItem('token')
-    toast('Вы вышли из системы')
-    navigate('/')
-  }
+    dispatch(logout());
+    window.localStorage.removeItem('token');
+    toast('Вы вышли из системы');
+    navigate('/');
+  };
+
+  const [posts, setPosts] = useState([]); // Изначально пустой массив
+
+  const fetchMyPosts = async () => {
+    try {
+      const { data } = await axios.get('/posts/user/me');
+      setPosts(data); // Сохраняем полученные данные в состояние
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMyPosts();
+  }, []); // Добавляем эффект для получения постов
 
   return (
     <main className="main" id="main">
-        <button onClick={logoutHandler}>Выйти</button>
-        <div className="meContainer" id="meContainer">
-            <img className="mePhoto" src={img} alt="photo"/>
-            <h1 className='meStatus'>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h1>
-            <div className='mePosts'>
-              
-            </div>
+      <button onClick={logoutHandler}>Выйти</button>
+      <div className="meContainer" id="meContainer">
+        <div className="userPosts">
+          {posts.length > 0 ? (
+            posts.map((post, idx) => <PostItem post={post} key={idx} />)
+          ) : (
+            <span>Постов нет</span>
+          )}
         </div>
+      </div>
     </main>
-  )
-}
+  );
+};

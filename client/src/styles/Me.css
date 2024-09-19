@@ -39,13 +39,6 @@
     margin: 10px 0;
   }
 
-  .meContainer img {
-    width: 100px;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
-
   .meContent{
     padding-bottom: 10px;
     margin-bottom: 10px;

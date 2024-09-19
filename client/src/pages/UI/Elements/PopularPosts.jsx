@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../../styles/Post.css'
-import img from '../../../images/i.jpg';
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComments } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";

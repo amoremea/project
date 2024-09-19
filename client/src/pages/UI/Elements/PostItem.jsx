@@ -4,6 +4,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComments } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 import Moment from 'react-moment'
 
@@ -15,10 +16,12 @@ export const PostItem = ({ post }) => {
     }
     return (
         <div className='postContainer'>
+            <Link to={`/${post._id}`} style={{textDecoration: 'none', color: 'black'}}>
             <div className='postItemHeader'>
                 <div>{ post.username }</div>
                 <div className='postDate'> <Moment date={post.createdAt} format='D MMM YYYY H:mm'/></div>
             </div>
+            </Link>
             <div className='postContent'> 
                 <div className='postInfo'>
                     <span className='postTitle'>{ post.title }</span>
@@ -34,7 +37,7 @@ export const PostItem = ({ post }) => {
 
                 <button className='postContainerViews'>
                     <FaRegComments />
-                    <span className='commentsCounter'>{ post.views }</span>
+                    <span className='commentsCounter'>{ post.comments?.length || 0 }</span>
                 </button>
 
                 <button>
@@ -43,7 +46,7 @@ export const PostItem = ({ post }) => {
                 
                 <div className='postContainerViews'>
                     <FaEye />
-                    <span className='viewersCounter'>{ post.comments?.length }</span>
+                    <span className='viewersCounter'>{ post.views }</span>
                 </div>
             </div>
         </div>

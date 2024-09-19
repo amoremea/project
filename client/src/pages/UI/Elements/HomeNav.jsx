@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom";
 
-export const HomeNav = ({ children }) => {
+export const HomeNav = () => {
   return (
       <ul className='contentMenu'>
         <li>

@@ -29,7 +29,7 @@ function App() {
         <Route path=':id' element={<PostPage />} />
         <Route path=':id/edit' element={<EditPostPage />} />
         <Route path='create' element={<CreatePostPage />} />
-        <Route path='auth/login' element={<AuthPage />} />
+        <Route path='auth' element={<AuthPage />} />
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />
         <Route path='me' element={<MePage />}/>

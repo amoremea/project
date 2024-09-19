@@ -70,7 +70,7 @@ export const Header = () => {
               </NavLink>
               ) : (
                 <NavLink
-                to={"/auth/login"}
+                to={"/auth"}
                 href="/"
               >
                 <button className='authorization' id='authorization'>

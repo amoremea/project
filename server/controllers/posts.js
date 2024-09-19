@@ -66,3 +66,33 @@ export const getAll = async (req, res) => {
         res.status(500).json({ message: 'Ошибка при получении постов' });
     }
 };
+
+// Get Post By Id
+export const getById = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndUpdate(req.params.id, {
+            $inc: {views: 1},
+        })
+        return res.json(post);
+    } catch (error) {
+        console.error('Ошибка при получении постов:', error);
+        res.status(500).json({ message: 'Ошибка при получении постов' });
+    }
+};
+
+// Get My Posts
+export const getMyPosts = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId)
+        const list = await Promise.all(
+            user.posts.map(post => {
+                return Post.findById(post._id)
+            })
+        )
+
+        return res.json(list)
+    } catch (error) {
+        console.error('Ошибка при получении постов:', error);
+        res.status(500).json({ message: 'Ошибка при получении постов' });
+    }
+};

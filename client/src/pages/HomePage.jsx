@@ -3,16 +3,15 @@ import '../styles/Post.css'
 import { HomeNav } from './UI/Elements/HomeNav';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../redux/features/post/postSlice';
-import { PopularPosts } from './UI/Elements/PopularPosts';
 import { PostItem } from './UI/Elements/PostItem';
 
-export const HomePage = ({ children }) => {
+export const HomePage = () => {
   const dispatch = useDispatch()
-  const {posts, popularPosts} = useSelector(state => state.post)
+  const {posts} = useSelector(state => state.post)
 
   useEffect(() => {
     dispatch(getAllPosts())
-  }, [dispatch])
+  }, [])
 
   if (!posts || !posts.length) {
     return (
