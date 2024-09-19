@@ -1,44 +1,96 @@
 /* register */
 
 .postContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:column;
     font-family: 'IBM Plex Sans';
     padding: 20px 35px ;
     position: relative;
     overflow: hidden;
-    width: 1024px;
-    min-width: 1024px;
+    min-width: 400px;
+    max-width: 1024px;
+    width: 100%;
     border: 3px solid rgba(252, 249, 255, 0.508);
     border-top: none;
     box-shadow: 7px 5px 5px rgba(226, 153, 255, 0.493);
     border-radius: 10px;
     min-height: auto;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction:column;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
-  .postContainer h1{
-    font-size: 22px;
-    line-height: 22px;
-    letter-spacing: 0.2px;
-    margin: 10px 0;
+  
+  .postItemHeader {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-direction: row;
+    padding: 5px 10px;
   }
 
-  .postContainer h2{
+  .postItemHeader div {
+    padding: 5px 10px;
+    margin: 3px;
+    border: solid transparent;
+    border-radius: 30px;
+    cursor: default;
+    border-bottom: 1px solid rgba(252, 156, 156, 0.349);
+    border-left: 1px solid rgba(170, 207, 255, 0.678);
+  }
+
+  .postItemHeader div:hover {
+    padding: 5px 10px;
+    border: solid transparent;
+    border-radius: 30px;
+    background-color: rgba(128, 128, 128, 0.116);
+    transition: 0.3s ease-in-out;
+    border-bottom: 1px solid rgba(252, 156, 156, 0.349);
+    border-left: 1px solid rgba(170, 207, 255, 0.678);
+  }
+  .postDate{
     font-size: 14px;
-    line-height: 16px;
+  }
+
+  .postInfo{
+    width: 100%;
+    display: flex ;
+    flex-direction: column;
+    justify-content: left;
+    text-align: center;
+  }
+
+  .postTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: center;
+    text-align: left;
+    width: 100%;
+    font-size: 22px;
     letter-spacing: 0.2px;
-    margin: 10px 0;
+    margin: 20px 20px 0 20px;
+  }
+
+  .postText{
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    flex-direction: row;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    margin: 10px 20px 0 20px;
   }
 
   .postContainer img {
-    width: auto;
+    width: 400px;
+    margin: 0 20px;
   }
 
   .postContent{
+    width: 100%;
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(252, 156, 156, 0.349);
@@ -48,25 +100,43 @@
 
   .iconsPosts {
     width: 100%;
-    padding: 0px 20px 0px 20px;
-    font-size: 28px;
+    margin: 10px 0 0 0;
     display: flex;
-    justify-content: space-between;
+    text-align: center;
     flex-direction: row;
-    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .iconsPosts button{
+    color: black;
+    border: solid transparent;
+    border-radius: 30px;
+    background-color: transparent;
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: 19px;
+    background-color: rgba(194, 194, 194, 0.315);
+    transition: 0.35s ease-in-out;
     cursor: pointer;
+    letter-spacing: 2px;
   }
 
-  .postIcon:hover {
-    color: rgba(226, 153, 255, 0.85);
-    transition: all 0.2s ease-in-out;
+  .iconsPosts button:hover{
+    color: rgb(156, 0, 156);
+    border: solid transparent;
+    background-color: rgba(135, 0, 153, 0.212);
+    transition: 0.5s ease-in-out;
   }
 
-  .iconRight {
-    margin-left: 700px; /* Оставляет пространство между этой иконкой и остальными */
+  .iconsPosts .postContainerViews:last-child{
+    margin-left: auto; /* Отправить последнюю иконку вправо */
   }
 
-  .viewersCounter{
-    font-size: 20px;
-    color:rgb(0, 11, 26);
+  .iconsPosts div{
+    margin: 0 15px 0 0;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    font-size: 19px;
   }

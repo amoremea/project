@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom";
-import '../../../styles/Post.css'
 
 export const HomeNav = ({ children }) => {
   return (
@@ -10,6 +9,13 @@ export const HomeNav = ({ children }) => {
             to={'/'}
           >
             <button>News</button>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+           to={'/popular'}
+          >
+          <button id='popular'>Popular</button>
           </NavLink>
         </li>
         <li>

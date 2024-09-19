@@ -9,6 +9,7 @@ import { ChatPage } from "./pages/ChatPage.jsx"
 import { AuthPage } from "./pages/AuthPage.jsx"
 import { ToastContainer } from 'react-toastify'
 import { MePage } from './pages/Me.jsx'
+import { PopularPage } from './pages/PopularPage.jsx'
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -32,6 +33,7 @@ function App() {
         <Route path='friends' element={<FriendsPage />} />
         <Route path='chat' element={<ChatPage />} />
         <Route path='me' element={<MePage />}/>
+        <Route path='popular' element={<PopularPage />} />
       </Routes>
 
       <ToastContainer position='bottom-right'/>

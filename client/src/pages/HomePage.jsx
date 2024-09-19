@@ -14,11 +14,6 @@ export const HomePage = ({ children }) => {
     dispatch(getAllPosts())
   }, [dispatch])
 
-  useEffect(() => {
-    console.log('Posts:', posts);
-    console.log('Popular Posts:', popularPosts);
-  }, [posts, popularPosts]);
-
   if (!posts || !posts.length) {
     return (
       <main className="main" id="main">
@@ -38,12 +33,6 @@ export const HomePage = ({ children }) => {
           <div>Все посты</div>
           {posts?.map((post, idx) => (
             <PostItem key={idx} post={post} />
-          ))}
-        </div>
-        <div className='popularPosts'>
-          <div>Популярное</div>
-          {popularPosts?.map((post, idx) =>(
-            <PopularPosts key={idx} post={post}/>
           ))}
         </div>
       </div>
