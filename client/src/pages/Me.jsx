@@ -39,12 +39,12 @@ export const MePage = () => {
 
   useEffect(() => {
     fetchMyPosts();
-  }, []); // Добавляем эффект для получения постов
+  }, [fetchMyPosts]); // Добавляем эффект для получения постов
 
   return (
     <main className="main" id="main">
-      <button onClick={logoutHandler}>Выйти</button>
       <div className="meContainer" id="meContainer">
+        <button onClick={logoutHandler}>Выйти</button>
         <div className="userPosts">
           {posts.length > 0 ? (
             posts.map((post, idx) => <PostItem post={post} key={idx} />)

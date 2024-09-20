@@ -75,8 +75,8 @@ export const getById = async (req, res) => {
         })
         return res.json(post);
     } catch (error) {
-        console.error('Ошибка при получении постов:', error);
-        res.status(500).json({ message: 'Ошибка при получении постов' });
+        console.error('Ошибка при получении поста:', error);
+        res.status(500).json({ message: 'Ошибка при получении поста' });
     }
 };
 
@@ -94,5 +94,51 @@ export const getMyPosts = async (req, res) => {
     } catch (error) {
         console.error('Ошибка при получении постов:', error);
         res.status(500).json({ message: 'Ошибка при получении постов' });
+    }
+};
+
+// Remove Post
+export const removePost = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id);
+        
+        if (!post) {
+            return res.status(404).json({ message: 'Такого поста не существует' });
+        }
+
+        await User.findByIdAndUpdate(req.userId, {
+            $pull: { posts: post._id }
+        });
+
+        return res.json({ message: 'Пост был удален' });
+    } catch (error) {
+        console.error('Ошибка при удалении поста:', error);
+        res.status(500).json({ message: 'Ошибка при удалении поста' });
+    }
+};
+
+// Remove Post
+export const updatePost = async (req, res) => {
+    try {
+        const { title, text, id } = req.body
+        const post = await Post.findById(id)
+
+        let fileName = '';
+        if (req.files && req.files.image) {
+            fileName = Date.now().toString() + req.files.image.name;
+            const __dirname = dirname(fileURLToPath(import.meta.url));
+            const filePath = path.join(__dirname, '..', 'uploads', fileName);
+            post.imgUrl = fileName || ''
+        }
+
+        post.title = title
+        post.text = text
+
+        await post.save()
+
+        return res.json(post);
+    } catch (error) {
+        console.error('Ошибка при изменении поста:', error);
+        res.status(500).json({ message: 'Ошибка при изменении поста' });
     }
 };

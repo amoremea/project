@@ -11,7 +11,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     dispatch(getAllPosts())
-  }, [])
+  }, [dispatch])
 
   if (!posts || !posts.length) {
     return (

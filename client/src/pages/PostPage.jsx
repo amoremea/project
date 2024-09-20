@@ -1,19 +1,26 @@
-import React, { useCallback, useEffect, useState} from 'react'
-import { AiOutlineLike } from "react-icons/ai";
+import React, { useCallback, useEffect, useState} from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import { AiOutlineLike, AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
+import { toast } from 'react-toastify';
 import { FaRegComments } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { HomeNav } from './UI/Elements/HomeNav';
 import Moment from 'react-moment';
-import '../styles/Post.css'
+import '../styles/Post.css';
+import { removePost } from '../redux/features/post/postSlice';
 
 import axios from '../utils/axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 export const PostPage = () => {
+  const { user } = useSelector(state => state.auth)
+
   const [post, setPost] = useState(null)
+  const navigate = useNavigate()
   const params = useParams()
+  const dispatch = useDispatch()
 
   const fetchPost = useCallback(async() =>{
     const {data} = await axios.get(`/posts/${params.id}`)
@@ -30,12 +37,36 @@ export const PostPage = () => {
     )
   }
 
+  const removePostHandler = () =>{
+    try {
+      dispatch(removePost(params.id))
+      toast('Пост был удален')
+      navigate('/me')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <main className="main" id="main">
       <HomeNav />
       <Link to='/'>
       <button>Назад</button>
       </Link>
+      {
+          user?._id === post.author && (
+            <div>
+                <button>
+                  <Link to={`/${params.id}/edit`}>
+                    <AiTwotoneEdit />
+                  </Link>
+                </button>
+                <button onClick={removePostHandler}>
+                  <AiFillDelete />
+                </button>
+            </div>
+          )
+        }
       <div className='postContainer'>
             <div className='postItemHeader'>
                 <div>{ post.username }</div>
