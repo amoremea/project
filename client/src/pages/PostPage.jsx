@@ -58,7 +58,11 @@ export const PostPage = () => {
         )
       }
       {post && (
-        <PostItem post={post} />
+        <PostItem 
+        post={post} 
+        user={user} 
+        onRemove={removePostHandler} 
+      />
       )}
     </main>
   );

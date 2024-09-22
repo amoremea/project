@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+// БД для пользователей
 const UserSchema = new mongoose.Schema(
     {
         username: {

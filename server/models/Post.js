@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+// БД для постов
 const PostSchema = new mongoose.Schema(
     {
         username: {

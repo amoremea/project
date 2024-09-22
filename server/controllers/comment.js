@@ -1,6 +1,8 @@
 import Comment from "../models/Comment.js";
 import Post from '../models/Post.js'
 
+// Create Comment
+// Функция которая создает комментарий
 export const createComment = async (req, res) => {
     try {
         const {postId, comment} = req.body

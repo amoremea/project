@@ -11,23 +11,24 @@ import commentRoute from './routes/comments.js'
 const app = express()
 dotenv.config()
 
-// CONSTANTS
+// Используем .env
 const PORT = process.env.PORT || 3001
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_NAME = process.env.DB_NAME
 
-// Middleware
+// Middleware разделяем этапы обработки запросов на промежуточные обработчики
 app.use(cors())
 app.use(fileUpload())
 app.use(express.json())
 app.use(express.static('uploads'))
 
-// Routes
+// Routes с помощью маршрутов позволяем направлять каждый запрос к нужному контроллеру на сервере
 app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
 app.use('/api/comments', commentRoute)
 
+// Функция, которая подключает базу данных к локальному хосту и запускает сервер, либо возвращает ошибку
 async function start() {
     try {
         await mongoose.connect(
@@ -40,4 +41,5 @@ async function start() {
     }
 }
 
+// запускаем сервер
 start()

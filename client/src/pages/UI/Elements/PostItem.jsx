@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../../../styles/Post.css'
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComments } from "react-icons/fa";
@@ -6,8 +6,21 @@ import { FaEye } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment'
+import { useDispatch } from 'react-redux';
+import { createComment } from '../../../redux/features/comment/commentSlice.js';
 
 export const PostItem = ({ post }) => {
+    // const dispatch = useDispatch()
+    // const [comment, setComment] = useState('')
+    // const handleSubmit = () => {
+    //     try {
+    //         const postId = params.id
+    //         dispatch(createComment({postId, comment}))
+    //         setComment('')
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     return (
         <div className='postContainer'>
             <Link to={`/${post._id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -42,6 +55,12 @@ export const PostItem = ({ post }) => {
                     <FaEye />
                     <span className='viewersCounter'>{ post.views }</span>
                 </div>
+            </div>
+            <div className='comments'>
+                <form onSubmit={e => e.preventDefault()}>
+                    <input type="text" placeholder='comment' value={comment} onChange={e => setComment(e.target.value)}/>
+                    <button type='submit' onClick={handleSubmit}>Отправить</button>
+                </form>
             </div>
         </div>
     )

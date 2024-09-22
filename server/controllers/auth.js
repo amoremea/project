@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 // Register user
+// Функция которая регистрирует пользователя
 export const register = async (req, res) => {
     try {
         const {username, password} = req.body
@@ -39,6 +40,7 @@ export const register = async (req, res) => {
     }
 }
 // Login user
+// Функция с помощью которой пользователь входит на свой аккаунт
 export const login = async (req, res) => {
     try {
         const {username, password} = req.body
@@ -73,6 +75,7 @@ export const login = async (req, res) => {
     }
 }
 // Get Me
+// Функция которая проверяет есть ли токен у пользователя и действителен ли он
 export const getMe = async (req, res) => {
     try {
         const user = await User.findById(req.userId)

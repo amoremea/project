@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 
+// БД для комментариев
 const CommentSchema = new mongoose.Schema(
     {
         comment: {
