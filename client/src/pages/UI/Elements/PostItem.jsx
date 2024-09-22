@@ -5,15 +5,9 @@ import { FaRegComments } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { Link } from 'react-router-dom';
-
 import Moment from 'react-moment'
 
 export const PostItem = ({ post }) => {
-    if(!post) {
-        return <div className='postContainer'>
-            Постов не существует
-        </div>
-    }
     return (
         <div className='postContainer'>
             <Link to={`/${post._id}`} style={{textDecoration: 'none', color: 'black'}}>

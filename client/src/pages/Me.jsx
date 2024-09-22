@@ -11,13 +11,13 @@ export const MePage = () => {
   const { status } = useSelector((state) => state.auth);
   const isAuth = useSelector(checkIsAuth);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // For navigation after successful login/register
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuth) {
       navigate('/auth');
     }
-  }, [isAuth, navigate]); // Add `isAuth` and `navigate` to the dependency array
+  }, [isAuth, navigate]);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -39,7 +39,7 @@ export const MePage = () => {
 
   useEffect(() => {
     fetchMyPosts();
-  }, [fetchMyPosts]); // Добавляем эффект для получения постов
+  }, []); // Добавляем эффект для получения постов
 
   return (
     <main className="main" id="main">

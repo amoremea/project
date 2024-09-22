@@ -13,17 +13,6 @@ export const HomePage = () => {
     dispatch(getAllPosts())
   }, [dispatch])
 
-  if (!posts || !posts.length) {
-    return (
-      <main className="main" id="main">
-        <HomeNav />
-        <div className='postContainer'>
-          Постов не существует
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="main" id="main">
       <HomeNav />

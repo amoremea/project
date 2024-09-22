@@ -117,7 +117,7 @@ export const removePost = async (req, res) => {
     }
 };
 
-// Remove Post
+// Update Post
 export const updatePost = async (req, res) => {
     try {
         const { title, text, id } = req.body

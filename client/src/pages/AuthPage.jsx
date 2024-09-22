@@ -16,6 +16,12 @@ export const AuthPage = () => {
   const navigate = useNavigate(); // For navigation after successful login/register
 
   useEffect(() => {
+    if (isAuth) {
+      navigate('/me');
+    }
+  }, [isAuth, navigate]);
+
+  useEffect(() => {
     if (status) {
       toast(status);
       if (isAuth) {
