@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment'
 import { useDispatch } from 'react-redux';
 import { createComment } from '../../../redux/features/comment/commentSlice.js';
-import {CommentItem} from './CommentItem.jsx'
-
+import { CommentItem } from './CommentItem.jsx'
 
 export const PostItem = ({ post }) => {
     const dispatch = useDispatch()
@@ -66,7 +65,9 @@ export const PostItem = ({ post }) => {
                 </form>
             </div>
             <div>
-                {post.comments}
+                {post.comments?.map((cmt, idx) => (
+                    <CommentItem key={idx} cmt={cmt} />
+                ))}
             </div>
         </div>
     )

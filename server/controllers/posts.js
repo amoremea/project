@@ -145,11 +145,16 @@ export const updatePost = async (req, res) => {
 
 // Get All Comments
 //http://loaclhost:3002/api/posts/:id/comments
-export const getAllComments = async (req, res) => {
+export const getComment = async (req, res) => {
     try {
-        const post = await Post.findById()
-        console.log('Пост контроллер')
+        const post = await Post.findById(req.params.id)
+        const list = await Promise.all(
+            post.comments.map((comment) => {
+                return Comment.findById(comment)
+            }),
+        )
+        return res.json(list)
     } catch (error) {
-        console.log(error)
+        res.json({ message: 'Что-то пошло не так.' })
     }
 }
