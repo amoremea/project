@@ -29,7 +29,6 @@ export const getAllPosts = createAsyncThunk(
             return data;  // Ожидаем, что сервер вернёт объект с полями posts и popularPosts
         } catch (error) {
             console.log(error);
-            throw error;  // Проброс ошибки для обработки в .rejected
         }
     }
 );
@@ -51,6 +50,7 @@ export const updatePost = createAsyncThunk('post/updatePost', async (updatedPost
         console.log(error)
     }
 })
+
 
 
 const postSlice = createSlice({

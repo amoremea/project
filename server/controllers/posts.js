@@ -142,3 +142,14 @@ export const updatePost = async (req, res) => {
         res.status(500).json({ message: 'Ошибка при изменении поста' });
     }
 };
+
+// Get All Comments
+//http://loaclhost:3002/api/posts/:id/comments
+export const getAllComments = async (req, res) => {
+    try {
+        const post = await Post.findById()
+        console.log('Пост контроллер')
+    } catch (error) {
+        console.log(error)
+    }
+}

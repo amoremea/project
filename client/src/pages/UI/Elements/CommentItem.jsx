@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const CommentItem = () => {
+export const CommentItem = ({cmt}) => {
   return (
-    <div>CommentItem</div>
+    <div>{cmt.comment}</div>
   )
 }

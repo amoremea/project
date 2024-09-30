@@ -8,19 +8,22 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment'
 import { useDispatch } from 'react-redux';
 import { createComment } from '../../../redux/features/comment/commentSlice.js';
+import {CommentItem} from './CommentItem.jsx'
+
 
 export const PostItem = ({ post }) => {
-    // const dispatch = useDispatch()
-    // const [comment, setComment] = useState('')
-    // const handleSubmit = () => {
-    //     try {
-    //         const postId = params.id
-    //         dispatch(createComment({postId, comment}))
-    //         setComment('')
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const dispatch = useDispatch()
+
+    const [comment, setComment] = useState('')
+    const handleSubmit = () => {
+        try {
+            const postId = post._id
+            dispatch(createComment({postId, comment}))
+            setComment('')
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className='postContainer'>
             <Link to={`/${post._id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -61,6 +64,9 @@ export const PostItem = ({ post }) => {
                     <input type="text" placeholder='comment' value={comment} onChange={e => setComment(e.target.value)}/>
                     <button type='submit' onClick={handleSubmit}>Отправить</button>
                 </form>
+            </div>
+            <div>
+                {post.comments}
             </div>
         </div>
     )
