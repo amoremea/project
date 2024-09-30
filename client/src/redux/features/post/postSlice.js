@@ -16,7 +16,6 @@ export const createPost = createAsyncThunk(
             return data;
         } catch (error) {
             console.log(error);
-            throw error;  // Проброс ошибки для обработки в .rejected
         }
     }
 );

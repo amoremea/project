@@ -13,6 +13,8 @@ export const HomePage = () => {
     dispatch(getAllPosts())
   }, [dispatch])
 
+  
+
   return (
     <main className="main" id="main">
       <HomeNav />

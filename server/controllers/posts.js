@@ -143,18 +143,15 @@ export const updatePost = async (req, res) => {
     }
 };
 
-// Get All Comments
-//http://loaclhost:3002/api/posts/:id/comments
-export const getComment = async (req, res) => {
+// Get Post Comment
+export const getPostComments = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id)
-        const list = await Promise.all(
-            post.comments.map((comment) => {
-                return Comment.findById(comment)
-            }),
-        )
-        return res.json(list)
+        const postId = req.params.id
+        const post = await Post.findById(postId).populate('comments')
+        const list = post.comments
+        res.json(list)
     } catch (error) {
-        res.json({ message: 'Что-то пошло не так.' })
+        console.error('Ошибка при получении комментариев поста:', error)
+        res.status(500).json({ message: 'Что-то пошло не так.' })
     }
-}
+};
