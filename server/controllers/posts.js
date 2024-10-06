@@ -1,7 +1,8 @@
-import Post from '../models/Post.js';
-import User from '../models/User.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import Post from '../models/Post.js'
+import User from '../models/User.js'
+import Comment from '../models/Comment.js'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
 // Create post
 export const createPost = async (req, res) => {
@@ -146,12 +147,14 @@ export const updatePost = async (req, res) => {
 // Get Post Comment
 export const getPostComments = async (req, res) => {
     try {
-        const postId = req.params.id
-        const post = await Post.findById(postId).populate('comments')
-        const list = post.comments
+        const post = await Post.findById(req.params.id)
+        const list = await Promise.all(
+            post.comments.map((comment) => {
+                return Comment.findById(comment)
+            }),
+        )
         res.json(list)
     } catch (error) {
-        console.error('Ошибка при получении комментариев поста:', error)
-        res.status(500).json({ message: 'Что-то пошло не так.' })
+        res.json({ message: 'Что-то пошло не так.' })
     }
-};
+}

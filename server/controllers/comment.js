@@ -1,27 +1,37 @@
 import Comment from "../models/Comment.js";
-import Post from '../models/Post.js'
+import Post from '../models/Post.js';
 
 // Create Comment
-// Функция которая создает комментарий
 export const createComment = async (req, res) => {
     try {
-        const {postId, comment} = req.body
+        const { postId, comment } = req.body;
 
-        if(!comment) return res.json({message: "Комментарий не может быть пустым"})
-
-        const newComment = new Comment({comment})
-        await newComment.save()
-
-        try {
-            await Post.findByIdAndUpdate(postId, {
-                $push: {comments: newComment._id}
-            })
-        } catch (error) {
-            console.log(error)
+        // Проверка на пустой комментарий
+        if (!comment) {
+            return res.status(400).json({ message: "Комментарий не может быть пустым" });
         }
 
-        res.json(newComment)
+        // Проверка существования поста
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: "Пост не найден" });
+        }
+
+        // Создание нового комментария
+        const newComment = new Comment({
+            comment,
+            author: req.userId // Если есть информация о пользователе
+        });
+        await newComment.save();
+
+        // Обновление поста с добавлением комментария
+        post.comments.push(newComment._id);
+        await post.save();
+
+        // Возврат созданного комментария
+        res.status(201).json(newComment);
     } catch (error) {
-        res.json({message: 'Что-то пошло не так'})
+        console.error('Ошибка при создании комментария:', error);
+        res.status(500).json({ message: 'Что-то пошло не так' });
     }
-}
+};

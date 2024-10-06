@@ -12,9 +12,13 @@ export const HomePage = () => {
   useEffect(() => {
     dispatch(getAllPosts())
   }, [dispatch])
-
-  
-
+  if (!posts) {
+    return (
+        <div>
+            Загрузка...
+        </div>
+    )
+}
   return (
     <main className="main" id="main">
       <HomeNav />

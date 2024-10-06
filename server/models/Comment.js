@@ -1,20 +1,10 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
-// БД для комментариев
 const CommentSchema = new mongoose.Schema(
     {
-        comment: {
-            type: String,
-            required: true
-        },
-        author: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
+        comment: { type: String, required: true },
+        author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     },
-    {
-        timestamps: true,
-    }
+    { timestamps: true },
 )
-
 export default mongoose.model('Comment', CommentSchema)

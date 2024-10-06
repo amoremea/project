@@ -29,7 +29,7 @@ router.delete('/:id', checkAuth, removePost)
 router.put('/:id/edit', checkAuth, updatePost)
 
 // Get Post Comments
-//http://loaclhost:3002/api/posts/comments/:Id
-router.get('/comments/:id', getPostComments);
+//http://loaclhost:3002/api/posts/:id/comments
+router.get('/:id/comments', getPostComments);
 
 export default router

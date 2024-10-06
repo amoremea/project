@@ -1,6 +1,5 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
-// БД для пользователей
 const UserSchema = new mongoose.Schema(
     {
         username: {
@@ -12,16 +11,14 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        posts: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post',
-        },
-    ],
-
+        posts: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Post',
+            },
+        ],
     },
-    {
-        timestamps: true,
-    }
+    { timestamps: true },
 )
 
 export default mongoose.model('User', UserSchema)
